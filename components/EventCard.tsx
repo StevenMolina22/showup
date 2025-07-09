@@ -1,17 +1,21 @@
+"use client";
+
 import Link from "next/link";
-import { Calendar, MapPin, ExternalLink } from "lucide-react";
+import { Calendar, MapPin, ExternalLink, ImageIcon } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/lib/types";
 import { formatEventDate } from "@/lib/date-utils";
 import { formatEventPrice } from "@/lib/luma-utils";
+import { useState } from "react";
 
 interface EventCardProps {
   event: Event;
 }
 
 export default function EventCard({ event }: EventCardProps) {
+  const [imageError, setImageError] = useState(false);
   const getTagVariant = (tag: string) => {
     switch (tag.toLowerCase()) {
       case "crypto":
@@ -27,6 +31,27 @@ export default function EventCard({ event }: EventCardProps) {
 
   return (
     <Card className="group h-full bg-white hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-200 rounded-xl overflow-hidden">
+      {/* Event Image */}
+      {event.image && (
+        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+          {!imageError ? (
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+              <div className="text-center">
+                <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-sm text-gray-500">Event Image</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       <CardHeader className="pb-3">
         <div className="flex flex-wrap gap-2 mb-3">
           {event.tags.map((tag, index) => (

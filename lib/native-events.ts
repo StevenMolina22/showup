@@ -38,14 +38,15 @@ const nativeEvents: NativeEvent[] = [
     location: "Innovation Hub NYC",
     fullAddress: "123 Tech Street, New York, NY 10001",
     city: "New York",
-    image: "/images/pitch-night.jpg",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
     tags: ["crypto", "startup", "networking", "investment"],
     maxAttendees: 150,
     stakeAmount: 0.01, // 0.01 ETH
     organizer: {
       name: "Sarah Chen",
       email: "sarah@cryptostartups.nyc",
-      avatar: "/avatars/sarah.jpg",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
     },
     isActive: true,
     createdAt: "2024-01-01T10:00:00.000Z",
@@ -62,14 +63,15 @@ const nativeEvents: NativeEvent[] = [
     location: "Silicon Valley Crypto Center",
     fullAddress: "456 Blockchain Ave, Palo Alto, CA 94301",
     city: "Palo Alto",
-    image: "/images/defi-security.jpg",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
     tags: ["defi", "security", "workshop", "education"],
     maxAttendees: 50,
     stakeAmount: 0.02, // 0.02 ETH
     organizer: {
       name: "Alex Rodriguez",
       email: "alex@defisec.io",
-      avatar: "/avatars/alex.jpg",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
     },
     isActive: true,
     createdAt: "2024-01-02T15:30:00.000Z",
@@ -86,18 +88,94 @@ const nativeEvents: NativeEvent[] = [
     location: "Digital Art Space London",
     fullAddress: "789 Creative Quarter, London, UK E1 6AN",
     city: "London",
-    image: "/images/nft-gallery.jpg",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
     tags: ["nft", "art", "gallery", "culture"],
     maxAttendees: 100,
     stakeAmount: 0.005, // 0.005 ETH
     organizer: {
       name: "Emma Thompson",
       email: "emma@digitalartspace.co.uk",
-      avatar: "/avatars/emma.jpg",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     },
     isActive: true,
     createdAt: "2024-01-03T09:15:00.000Z",
     updatedAt: "2024-01-03T09:15:00.000Z",
+  },
+  {
+    id: "native-4",
+    title: "Web3 Developer Bootcamp",
+    description:
+      "Intensive 3-day bootcamp covering smart contract development, dApp creation, and blockchain integration. Perfect for developers looking to enter the Web3 space.",
+    startAt: "2024-01-30T09:00:00.000Z",
+    endAt: "2024-02-01T17:00:00.000Z",
+    timezone: "America/New_York",
+    location: "Tech Hub Manhattan",
+    fullAddress: "321 Broadway, New York, NY 10007",
+    city: "New York",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
+    tags: ["web3", "dev", "education", "bootcamp"],
+    maxAttendees: 25,
+    stakeAmount: 0.05, // 0.05 ETH
+    organizer: {
+      name: "Michael Johnson",
+      email: "michael@web3bootcamp.com",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    },
+    isActive: true,
+    createdAt: "2024-01-04T12:00:00.000Z",
+    updatedAt: "2024-01-04T12:00:00.000Z",
+  },
+  {
+    id: "native-5",
+    title: "Blockchain Gaming Summit",
+    description:
+      "Explore the future of gaming with blockchain technology. Learn about NFT gaming, play-to-earn models, and the metaverse economy from industry leaders.",
+    startAt: "2024-02-05T10:00:00.000Z",
+    endAt: "2024-02-05T18:00:00.000Z",
+    timezone: "America/Los_Angeles",
+    location: "Gaming Convention Center",
+    fullAddress: "789 Gaming Blvd, Los Angeles, CA 90028",
+    city: "Los Angeles",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
+    tags: ["gaming", "blockchain", "nft", "metaverse"],
+    maxAttendees: 200,
+    stakeAmount: 0.03, // 0.03 ETH
+    organizer: {
+      name: "Lisa Park",
+      email: "lisa@blockchaingaming.com",
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+    },
+    isActive: true,
+    createdAt: "2024-01-05T14:30:00.000Z",
+    updatedAt: "2024-01-05T14:30:00.000Z",
+  },
+  {
+    id: "native-6",
+    title: "DAO Governance Workshop",
+    description:
+      "Learn about decentralized autonomous organizations (DAOs), governance tokens, and how to participate in decentralized decision-making processes.",
+    startAt: "2024-02-10T15:00:00.000Z",
+    endAt: "2024-02-10T19:00:00.000Z",
+    timezone: "Europe/Berlin",
+    location: "Berlin Blockchain Hub",
+    fullAddress: "456 Crypto Street, Berlin, Germany 10115",
+    city: "Berlin",
+    image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
+    tags: ["dao", "governance", "defi", "workshop"],
+    maxAttendees: 75,
+    stakeAmount: 0.015, // 0.015 ETH
+    organizer: {
+      name: "Andreas Mueller",
+      email: "andreas@daogov.de",
+      avatar:
+        "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=150&h=150&fit=crop&crop=face",
+    },
+    isActive: true,
+    createdAt: "2024-01-06T11:45:00.000Z",
+    updatedAt: "2024-01-06T11:45:00.000Z",
   },
 ];
 

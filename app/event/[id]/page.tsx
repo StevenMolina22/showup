@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -102,6 +102,19 @@ export default async function EventDetailPage({
             {event.title}
           </h1>
         </div>
+
+        {/* Event image */}
+        {event.image && (
+          <Card className="mb-8 animate-fade-in delay-50">
+            <CardContent className="p-0">
+              <img
+                src={event.image}
+                alt={event.title}
+                className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg"
+              />
+            </CardContent>
+          </Card>
+        )}
 
         {/* Event metadata card */}
         <Card className="mb-8 animate-fade-in delay-100">
