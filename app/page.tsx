@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import SearchBar from "@/components/SearchBar";
 import EventGrid from "@/components/EventGrid";
 import Footer from "@/components/Footer";
 import { getEvents } from "@/lib/event-service";
