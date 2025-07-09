@@ -2,24 +2,11 @@ import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import EventGrid from "@/components/EventGrid";
 import Footer from "@/components/Footer";
-import { fetchEvents } from "@/lib/apify";
-import { mockEvents } from "@/lib/mock-data";
+import { getCachedEvents } from "@/lib/event-utils";
 
 export default async function Home() {
-  // Fetch events from Apify API with fallback to mock data
-  let events;
-  try {
-    events = await fetchEvents();
-
-    // If API returns empty array, use mock data as fallback
-    if (events.length === 0) {
-      console.log("No events from API, using mock data");
-      events = mockEvents;
-    }
-  } catch (error) {
-    console.error("Failed to fetch events from API, using mock data:", error);
-    events = mockEvents;
-  }
+  // Fetch events using cached utility function with fallback to mock data
+  const events = await getCachedEvents();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50">

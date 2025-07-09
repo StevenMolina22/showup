@@ -1,12 +1,7 @@
 import { ApifyClient } from "apify-client";
 import { Event } from "./types";
-import { transformApifyEvents, isValidEvent } from "./transform-apify-data";
-import {
-  debugApifyResponse,
-  logEventFetchStatus,
-  PerformanceTimer,
-  validateEnvironment,
-} from "./debug-utils";
+import { transformApifyEvents } from "./transform-apify-data";
+import { logEventFetchStatus, validateEnvironment } from "./debug-utils";
 
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
