@@ -12,13 +12,15 @@ export default function EventActions({ event }: EventActionsProps) {
   const handleAddToCalendar = () => {
     // Reason: Generate calendar URL with event details for cross-platform compatibility
     const startDate =
-      new Date(event.date).toISOString().replace(/[-:]/g, "").split(".")[0] +
+      new Date(event.startAt).toISOString().replace(/[-:]/g, "").split(".")[0] +
       "Z";
-    const endDate =
-      new Date(new Date(event.date).getTime() + 2 * 60 * 60 * 1000)
-        .toISOString()
-        .replace(/[-:]/g, "")
-        .split(".")[0] + "Z";
+    const endDate = event.endAt
+      ? new Date(event.endAt).toISOString().replace(/[-:]/g, "").split(".")[0] +
+        "Z"
+      : new Date(new Date(event.startAt).getTime() + 2 * 60 * 60 * 1000)
+          .toISOString()
+          .replace(/[-:]/g, "")
+          .split(".")[0] + "Z";
 
     const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(event.description || "")}&location=${encodeURIComponent(event.location)}`;
 

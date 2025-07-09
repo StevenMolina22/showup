@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mockEvents } from "@/lib/mock-data";
 import { Event } from "@/lib/types";
+import { formatEventDate } from "@/lib/date-utils";
 import { Metadata } from "next";
 import EventActions from "./EventActions";
 
@@ -31,12 +32,12 @@ export async function generateMetadata({
     title: `${event.title} | Unified Tech Events`,
     description:
       event.description ||
-      `Join us for ${event.title} on ${event.date} in ${event.location}. ${event.tags.join(", ")} event.`,
+      `Join us for ${event.title} on ${formatEventDate(event.startAt, { timezone: event.timezone })} in ${event.location}. ${event.tags.join(", ")} event.`,
     openGraph: {
       title: event.title,
       description:
         event.description ||
-        `Join us for ${event.title} on ${event.date} in ${event.location}`,
+        `Join us for ${event.title} on ${formatEventDate(event.startAt, { timezone: event.timezone })} in ${event.location}`,
       type: "article",
       locale: "en_US",
       siteName: "Unified Tech Events",
@@ -46,7 +47,7 @@ export async function generateMetadata({
       title: event.title,
       description:
         event.description ||
-        `Join us for ${event.title} on ${event.date} in ${event.location}`,
+        `Join us for ${event.title} on ${formatEventDate(event.startAt, { timezone: event.timezone })} in ${event.location}`,
     },
   };
 }
@@ -130,7 +131,21 @@ export default async function EventDetailPage({
                   <h3 className="font-semibold text-gray-900 mb-1">
                     Date & Time
                   </h3>
-                  <p className="text-gray-600">{event.date}</p>
+                  <p className="text-gray-600">
+                    {formatEventDate(event.startAt, {
+                      includeTime: true,
+                      timezone: event.timezone,
+                    })}
+                    {event.endAt && (
+                      <span>
+                        {" - "}
+                        {formatEventDate(event.endAt, {
+                          includeTime: true,
+                          timezone: event.timezone,
+                        })}
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
 
@@ -141,7 +156,9 @@ export default async function EventDetailPage({
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Location</h3>
-                  <p className="text-gray-600">{event.location}</p>
+                  <p className="text-gray-600">
+                    {event.fullAddress || event.location}
+                  </p>
                 </div>
               </div>
 
@@ -234,7 +251,12 @@ export default async function EventDetailPage({
                         <div className="space-y-2 text-sm text-gray-600">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
-                            <span>{relatedEvent.date}</span>
+                            <span>
+                              {formatEventDate(relatedEvent.startAt, {
+                                includeTime: true,
+                                timezone: relatedEvent.timezone,
+                              })}
+                            </span>
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4" />

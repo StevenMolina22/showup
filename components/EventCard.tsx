@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { Calendar, MapPin, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/lib/types";
-import Link from "next/link";
+import { formatEventDate } from "@/lib/date-utils";
+import { formatEventPrice } from "@/lib/luma-utils";
 
 interface EventCardProps {
   event: Event;
@@ -48,12 +50,36 @@ export default function EventCard({ event }: EventCardProps) {
         <div className="space-y-3 mb-4">
           <div className="flex items-center gap-2 text-gray-600">
             <Calendar className="w-4 h-4 flex-shrink-0" />
-            <span className="text-sm font-medium">{event.date}</span>
+            <span className="text-sm font-medium">
+              {formatEventDate(event.startAt, {
+                includeTime: true,
+                timezone: event.timezone,
+              })}
+            </span>
           </div>
 
           <div className="flex items-center gap-2 text-gray-600">
             <MapPin className="w-4 h-4 flex-shrink-0" />
             <span className="text-sm">{event.location}</span>
+          </div>
+
+          {/* Price information */}
+          <div className="flex items-center justify-between mt-2">
+            <span className="text-sm font-semibold text-green-600">
+              {formatEventPrice(event.price)}
+            </span>
+            {event.isSoldOut && (
+              <Badge variant="secondary" className="text-xs">
+                Sold Out
+              </Badge>
+            )}
+            {event.spotsRemaining &&
+              event.spotsRemaining <= 10 &&
+              !event.isSoldOut && (
+                <Badge variant="outline" className="text-xs">
+                  {event.spotsRemaining} left
+                </Badge>
+              )}
           </div>
         </div>
 
