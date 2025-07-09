@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Calendar, MapPin, ImageIcon } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
