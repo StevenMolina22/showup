@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/lib/types";
+import Link from "next/link";
 
 interface EventCardProps {
   event: Event;
@@ -11,14 +12,14 @@ interface EventCardProps {
 export default function EventCard({ event }: EventCardProps) {
   const getTagVariant = (tag: string) => {
     switch (tag.toLowerCase()) {
-      case 'crypto':
-        return 'bg-orange-100 text-orange-800 hover:bg-orange-200';
-      case 'ai':
-        return 'bg-purple-100 text-purple-800 hover:bg-purple-200';
-      case 'dev':
-        return 'bg-blue-100 text-blue-800 hover:bg-blue-200';
+      case "crypto":
+        return "bg-orange-100 text-orange-800 hover:bg-orange-200";
+      case "ai":
+        return "bg-purple-100 text-purple-800 hover:bg-purple-200";
+      case "dev":
+        return "bg-blue-100 text-blue-800 hover:bg-blue-200";
       default:
-        return 'bg-gray-100 text-gray-800 hover:bg-gray-200';
+        return "bg-gray-100 text-gray-800 hover:bg-gray-200";
     }
   };
 
@@ -36,9 +37,11 @@ export default function EventCard({ event }: EventCardProps) {
             </Badge>
           ))}
         </div>
-        <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors">
-          {event.title}
-        </h3>
+        <Link href={`/event/${event.id}`}>
+          <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors cursor-pointer">
+            {event.title}
+          </h3>
+        </Link>
       </CardHeader>
 
       <CardContent className="pt-0">
@@ -60,20 +63,33 @@ export default function EventCard({ event }: EventCardProps) {
           </p>
         )}
 
-        <Button
-          asChild
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 hover:scale-105"
-        >
-          <a
-            href={event.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2"
+        <div className="flex gap-2">
+          <Button
+            asChild
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 hover:scale-105"
           >
-            View Event
-            <ExternalLink className="w-4 h-4" />
-          </a>
-        </Button>
+            <Link
+              href={`/event/${event.id}`}
+              className="flex items-center justify-center gap-2"
+            >
+              View Details
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="px-3 border-gray-300 hover:bg-gray-50 transition-all duration-200"
+          >
+            <a
+              href={event.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

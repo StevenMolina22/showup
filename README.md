@@ -7,7 +7,9 @@ A minimalist, modern tech events aggregator app built with Next.js 15, Tailwind 
 - **Clean, Modern UI**: Minimalist design with subtle animations and hover effects
 - **Responsive Design**: Mobile-first approach with responsive grid layout
 - **Event Cards**: Beautiful cards displaying event details, dates, locations, and tags
+- **Event Detail Pages**: Dedicated pages for each event with full descriptions and actions
 - **Category Tags**: Color-coded tags for Crypto, AI, and Dev events
+- **Interactive Actions**: Add to calendar, share events, and external links
 - **Search Bar**: Ready for future search functionality (currently mocked)
 - **Accessibility**: Built with semantic HTML and proper ARIA labels
 - **TypeScript**: Full type safety throughout the application
@@ -30,7 +32,10 @@ The app features:
 - A centered search bar (mocked for demo)
 - Responsive grid of event cards (1 col on mobile, 2-3 cols on desktop)
 - Color-coded tags for different event categories
-- External links to actual event pages
+- Clickable event cards that navigate to detailed event pages
+- Event detail pages with full descriptions, metadata, and action buttons
+- Add to calendar functionality and social sharing
+- Related events suggestions based on tags
 - Simple footer with attribution
 
 ## 🚀 Getting Started
@@ -72,6 +77,10 @@ pnpm start
 ```
 events-zed/
 ├── app/                    # Next.js App Router
+│   ├── event/[id]/        # Dynamic event detail pages
+│   │   ├── page.tsx       # Event detail page component
+│   │   ├── not-found.tsx  # 404 page for missing events
+│   │   └── EventActions.tsx # Client component for interactive buttons
 │   ├── globals.css        # Global styles and animations
 │   ├── layout.tsx         # Root layout with metadata
 │   └── page.tsx           # Main page component
@@ -83,6 +92,7 @@ events-zed/
 │   ├── Header.tsx        # Header with branding
 │   └── SearchBar.tsx     # Search bar (mocked)
 ├── lib/                  # Utilities and types
+│   ├── date-utils.ts     # Date formatting utilities
 │   ├── mock-data.ts      # Sample event data
 │   ├── types.ts          # TypeScript interfaces
 │   └── utils.ts          # Utility functions
@@ -110,9 +120,10 @@ events-zed/
 - **Accent**: Lighter gray for secondary information
 
 ### Animations
-- **Fade-in**: Staggered animation for event cards
+- **Fade-in**: Staggered animation for event cards and detail pages
 - **Hover Effects**: Subtle scale and color transitions
-- **Button Interactions**: Smooth hover states
+- **Button Interactions**: Smooth hover states with scale effects
+- **Navigation**: Smooth transitions between pages
 
 ## 🔧 Development
 
@@ -152,10 +163,10 @@ interface Event {
 - [ ] Search and filtering functionality
 - [ ] Event categories and advanced filtering
 - [ ] User preferences and saved events
-- [ ] Calendar integration
+- [ ] Enhanced calendar integration
 - [ ] Event notifications
 - [ ] Dark mode toggle
-- [ ] Event detail pages
+- [ ] User authentication and saved events
 
 ## 📄 License
 
