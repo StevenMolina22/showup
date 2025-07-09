@@ -2,9 +2,25 @@ import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import EventGrid from "@/components/EventGrid";
 import Footer from "@/components/Footer";
+import { fetchEvents } from "@/lib/apify";
 import { mockEvents } from "@/lib/mock-data";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch events from Apify API with fallback to mock data
+  let events;
+  try {
+    events = await fetchEvents();
+
+    // If API returns empty array, use mock data as fallback
+    if (events.length === 0) {
+      console.log("No events from API, using mock data");
+      events = mockEvents;
+    }
+  } catch (error) {
+    console.error("Failed to fetch events from API, using mock data:", error);
+    events = mockEvents;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50">
       <Header
@@ -22,7 +38,15 @@ export default function Home() {
 
         {/* Events Section */}
         <section className="w-full">
-          <EventGrid events={mockEvents} />
+          {events.length > 0 ? (
+            <EventGrid events={events} />
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500">
+                No events found. Please try again later.
+              </p>
+            </div>
+          )}
         </section>
       </main>
 
