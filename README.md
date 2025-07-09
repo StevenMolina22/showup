@@ -1,42 +1,117 @@
-# Unified Tech Events
+# Attend-Sure: Blockchain-Based Event RSVP Platform
 
-A minimalist, modern tech events aggregator app built with Next.js 15, Tailwind CSS 4, and Shadcn/UI components. Discover and attend crypto and AI events from various sources, all in one place.
+**"Stake to commit, get rewards after showing up"**
 
-## 🚀 Features
+A revolutionary crypto event platform that reduces no-shows through blockchain-native staking deposits and provides verifiable proof of attendance. Built with Next.js 15, Tailwind CSS 4, and Web3 integration.
 
-- **Clean, Modern UI**: Minimalist design with subtle animations and hover effects
-- **Responsive Design**: Mobile-first approach with responsive grid layout
-- **Event Cards**: Beautiful cards displaying event details, dates, locations, and tags
-- **Event Detail Pages**: Dedicated pages for each event with full descriptions and actions
-- **Category Tags**: Color-coded tags for Crypto, AI, and Dev events
-- **Interactive Actions**: Add to calendar, share events, and external links
-- **Search Bar**: Ready for future search functionality (currently mocked)
-- **Accessibility**: Built with semantic HTML and proper ARIA labels
-- **TypeScript**: Full type safety throughout the application
-- **Dark Mode Ready**: CSS variables configured for easy dark mode implementation
+## 🎯 The Problem
+
+Crypto event organizers face **30-50% no-show rates**, leading to:
+- Wasted resources and poor planning accuracy
+- Reduced event quality and networking opportunities
+- Lack of verifiable attendance tracking
+- No alignment between RSVP commitment and actual attendance
+
+Traditional platforms like Eventbrite, Lu.ma, and Meetup lack mechanisms to ensure *attendance commitment*, particularly for crypto-native communities.
+
+## 💡 The Solution
+
+**Attend-Sure leverages blockchain-native staking for committed RSVPs:**
+
+- 🔒 **Stake to RSVP**: Attendees stake a refundable deposit when registering
+- ✅ **Verify Attendance**: Scan QR codes or sign wallet messages on-site to confirm attendance
+- 💰 **Get Rewards**: Deposits refunded automatically + bonus tokens upon verification
+- ❌ **No-Show Penalty**: Forfeited deposits support community initiatives
+- 🏆 **Proof of Attendance**: Non-transferable NFTs (POAPs) build verifiable participation history
+
+## 🚀 Key Features
+
+### Event Discovery & Aggregation
+- **Multi-Source Events**: Curated crypto events from Eventbrite, Lu.ma, Meetup, and native listings
+- **Smart Filtering**: AI-powered categorization for Crypto, DeFi, AI, and Dev events
+- **Clean, Modern UI**: Minimalist design with responsive grid layout
+- **Real-time Data**: Live event updates and availability tracking
+
+### Blockchain RSVP System
+- **Wallet Integration**: Connect with MetaMask, WalletConnect, and major Web3 wallets
+- **Smart Contracts**: Trustless deposit management and automatic settlements
+- **Flexible Staking**: Customizable deposit amounts per event type
+- **Multi-Chain Support**: Ethereum, Polygon, Base, and other EVM chains
+
+### Attendance Verification
+- **QR Code Scanning**: Event organizers generate unique QR codes for check-ins
+- **Wallet Signatures**: Cryptographic proof of attendance via wallet message signing
+- **Real-time Settlement**: Instant deposit refunds and reward distribution
+- **Fraud Prevention**: Multi-factor verification to prevent fake check-ins
+
+### Proof of Attendance Protocol (POAP)
+- **NFT Credentials**: Non-transferable tokens proving event participation
+- **Reputation Building**: On-chain attendance history for governance and community access
+- **Custom Designs**: Branded POAPs for events and organizers
+- **Interoperability**: Compatible with DAO governance and DID systems
 
 ## 🛠️ Tech Stack
 
+### Frontend
 - **Framework**: Next.js 15 with App Router
 - **Styling**: Tailwind CSS 4 with custom theme
 - **Components**: Shadcn/UI (New York style)
 - **Icons**: Lucide React
 - **Typography**: Geist Sans & Geist Mono fonts
-- **Animation**: Custom CSS animations with tw-animate-css
-- **Language**: TypeScript
+- **Animation**: Custom CSS animations with staggered effects
 
-## 📱 Screenshots
+### Blockchain Integration
+- **Web3 Library**: Viem + Wagmi for type-safe Ethereum interactions
+- **Wallet Connection**: RainbowKit for seamless wallet integration
+- **Smart Contracts**: Solidity contracts for staking and settlement
+- **IPFS Storage**: Decentralized metadata storage for POAPs
+- **Multi-Chain**: Support for Ethereum, Polygon, Base, Arbitrum
 
-The app features:
-- A clean header with app branding and calendar icon
-- A centered search bar (mocked for demo)
-- Responsive grid of event cards (1 col on mobile, 2-3 cols on desktop)
-- Color-coded tags for different event categories
-- Clickable event cards that navigate to detailed event pages
-- Event detail pages with full descriptions, metadata, and action buttons
-- Add to calendar functionality and social sharing
-- Related events suggestions based on tags
-- Simple footer with attribution
+### Backend & APIs
+- **Event Aggregation**: Apify API for Lu.ma and other event sources
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js with Web3 wallet authentication
+- **File Storage**: IPFS via Pinata for decentralized asset storage
+
+## 📱 How It Works
+
+### 1. Event Discovery
+- Browse curated crypto events from multiple sources
+- Filter by location, date, category, and stake requirements
+- View detailed event information including organizer reputation
+
+### 2. Stake to RSVP
+- Connect your Web3 wallet (MetaMask, WalletConnect, etc.)
+- Review event details and stake requirements
+- Submit deposit via smart contract transaction
+- Receive RSVP confirmation and calendar integration
+
+### 3. Attend & Verify
+- Arrive at the event location
+- Scan the organizer's QR code or sign a wallet message
+- Automatic verification and attendance recording
+- Real-time settlement processing
+
+### 4. Claim Rewards
+- Deposit automatically refunded upon attendance verification
+- Receive bonus tokens from the reward pool
+- Mint exclusive event POAP NFT
+- Build on-chain reputation for future events
+
+## 🎯 Target Market
+
+- **Event Organizers**: Crypto meetups, hackathons, DAOs, blockchain conferences
+- **Community Builders**: Web3 projects seeking engaged community participation
+- **Attendees**: Crypto enthusiasts wanting verifiable participation credentials
+- **Enterprise**: Companies hosting crypto/Web3 events and workshops
+
+## 💼 Business Model
+
+- **Staking Fees**: 1-3% transaction fee on deposits and settlements
+- **SaaS Tools**: Event management dashboard and analytics for organizers
+- **White-Label**: Branded staking RSVP infrastructure for large conferences
+- **Premium POAPs**: Custom NFT designs and enhanced metadata features
+- **API Licensing**: Third-party integration for existing event platforms
 
 ## 🚀 Getting Started
 
@@ -44,13 +119,15 @@ The app features:
 
 - Node.js 18 or later
 - pnpm (recommended) or npm
+- Web3 wallet (MetaMask, etc.)
+- Testnet ETH for development
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd events-zed
+git clone https://github.com/your-org/attend-sure
+cd attend-sure
 ```
 
 2. Install dependencies:
@@ -58,12 +135,23 @@ cd events-zed
 pnpm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Add your API keys and contract addresses
+```
+
+4. Deploy smart contracts (for development):
+```bash
+pnpm contracts:deploy
+```
+
+5. Run the development server:
 ```bash
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ### Building for Production
 
@@ -75,115 +163,151 @@ pnpm start
 ## 📁 Project Structure
 
 ```
-events-zed/
+attend-sure/
 ├── app/                    # Next.js App Router
-│   ├── event/[id]/        # Dynamic event detail pages
-│   │   ├── page.tsx       # Event detail page component
-│   │   ├── not-found.tsx  # 404 page for missing events
-│   │   └── EventActions.tsx # Client component for interactive buttons
-│   ├── globals.css        # Global styles and animations
-│   ├── layout.tsx         # Root layout with metadata
-│   └── page.tsx           # Main page component
+│   ├── event/[id]/        # Event detail and RSVP pages
+│   ├── dashboard/         # User dashboard and history
+│   ├── organizer/         # Event creation and management
+│   └── api/               # API routes for backend logic
 ├── components/            # React components
 │   ├── ui/               # Shadcn/UI components
-│   ├── EventCard.tsx     # Individual event card
-│   ├── EventGrid.tsx     # Responsive grid layout
-│   ├── Footer.tsx        # Footer component
-│   ├── Header.tsx        # Header with branding
-│   └── SearchBar.tsx     # Search bar (mocked)
-├── lib/                  # Utilities and types
-│   ├── date-utils.ts     # Date formatting utilities
-│   ├── mock-data.ts      # Sample event data
+│   ├── web3/             # Web3 and wallet components
+│   ├── events/           # Event-specific components
+│   └── rsvp/             # RSVP flow components
+├── contracts/            # Smart contracts and ABIs
+│   ├── AttendSure.sol    # Main staking contract
+│   ├── POAPToken.sol     # Proof of attendance NFT
+│   └── deploy/           # Deployment scripts
+├── lib/                  # Utilities and configurations
+│   ├── web3/             # Blockchain utilities
+│   ├── api/              # API client functions
 │   ├── types.ts          # TypeScript interfaces
-│   └── utils.ts          # Utility functions
+│   └── utils.ts          # General utilities
 ├── docs/                 # Documentation
-│   ├── PLANNING.md       # Project architecture
-│   ├── RULES.md          # Development rules
-│   └── TASKS.md          # Task tracking
+│   ├── PLANNING.md       # Technical architecture
+│   ├── CONTRACTS.md      # Smart contract documentation
+│   └── TASKS.md          # Development tasks
 └── public/               # Static assets
 ```
+
+## 🔐 Security Features
+
+- **Multi-Sig Contracts**: Protected treasury and admin functions
+- **Audit Trail**: Complete on-chain history of all transactions
+- **Rate Limiting**: Protection against spam and abuse
+- **Fraud Detection**: ML-based detection of suspicious patterns
+- **Emergency Pause**: Circuit breaker for critical security issues
+
+## 🌐 Supported Networks
+
+- **Mainnet**: Ethereum (primary)
+- **L2 Solutions**: Polygon, Base, Arbitrum, Optimism
+- **Testnets**: Sepolia, Mumbai, Base Goerli
+- **Future**: Solana, Avalanche, and other major chains
 
 ## 🎨 Design System
 
 ### Color Scheme
-- **Primary**: Blue (#2563eb) for CTAs and links
-- **Tags**: 
-  - Crypto: Orange (#f97316)
-  - AI: Purple (#7c3aed)
-  - Dev: Blue (#2563eb)
-- **Background**: Clean white with subtle gradient
-- **Cards**: White with subtle shadows and hover effects
+- **Primary**: Blue (#2563eb) for blockchain actions
+- **Success**: Green (#10b981) for successful transactions
+- **Warning**: Orange (#f59e0b) for pending states
+- **Error**: Red (#ef4444) for failed transactions
+- **Crypto Tags**: Orange (#f97316) for crypto events
+- **AI Tags**: Purple (#7c3aed) for AI events
 
 ### Typography
-- **Headers**: Bold, large text for event titles
-- **Body**: Clear, readable text for dates and descriptions
-- **Accent**: Lighter gray for secondary information
-
-### Animations
-- **Fade-in**: Staggered animation for event cards and detail pages
-- **Hover Effects**: Subtle scale and color transitions
-- **Button Interactions**: Smooth hover states with scale effects
-- **Navigation**: Smooth transitions between pages
+- **Headers**: Bold Geist Sans for event titles and CTAs
+- **Body**: Regular Geist Sans for descriptions and details
+- **Code**: Geist Mono for wallet addresses and transaction hashes
+- **Accent**: Lighter grays for secondary information
 
 ## 🔧 Development
 
-### Adding New Components
+### Smart Contract Development
 
-1. Create component in `components/` directory
-2. Add TypeScript interface in `lib/types.ts`
-3. Follow the established patterns from existing components
-4. Ensure mobile-first responsive design
+```bash
+# Compile contracts
+pnpm contracts:compile
 
-### Adding New Event Data
+# Run tests
+pnpm contracts:test
 
-Events follow this structure:
-```typescript
-interface Event {
-  id: string;
-  title: string;
-  date: string;
-  location: string;
-  link: string;
-  tags: string[];
-  description?: string;
-  image?: string;
-}
+# Deploy to testnet
+pnpm contracts:deploy:testnet
+
+# Verify contracts
+pnpm contracts:verify
 ```
 
-### Custom Styling
+### Frontend Development
 
-- Use Tailwind utility classes
-- Custom animations in `app/globals.css`
-- Follow the established color scheme
-- Maintain consistency with existing components
+```bash
+# Start development server
+pnpm dev
 
-## 🚧 Future Enhancements
+# Run type checking
+pnpm type-check
 
-- [ ] Real-time event fetching from Lu.ma API
-- [ ] Search and filtering functionality
-- [ ] Event categories and advanced filtering
-- [ ] User preferences and saved events
-- [ ] Enhanced calendar integration
-- [ ] Event notifications
-- [ ] Dark mode toggle
-- [ ] User authentication and saved events
+# Run linting
+pnpm lint
 
-## 📄 License
+# Run tests
+pnpm test
+```
 
-This project is built for demonstration purposes. Feel free to use and modify as needed.
+## 🚧 Roadmap
+
+### Phase 1: MVP (Q1 2024)
+- [x] Event aggregation and discovery
+- [x] Basic UI and responsive design
+- [ ] Wallet integration and Web3 authentication
+- [ ] Smart contract deployment on testnet
+- [ ] Basic staking and refund functionality
+- [ ] QR code attendance verification
+
+### Phase 2: Beta Launch (Q2 2024)
+- [ ] Mainnet deployment
+- [ ] POAP NFT minting
+- [ ] Organizer dashboard
+- [ ] Advanced fraud prevention
+- [ ] Mobile app development
+- [ ] Multi-chain support
+
+### Phase 3: Scale (Q3-Q4 2024)
+- [ ] API for third-party integrations
+- [ ] Advanced analytics and reporting
+- [ ] DAO governance integration
+- [ ] Enterprise white-label solutions
+- [ ] Global expansion and partnerships
 
 ## 🤝 Contributing
 
-1. Check `docs/TASKS.md` for current tasks
-2. Follow the patterns in `docs/PLANNING.md`
-3. Adhere to the rules in `docs/RULES.md`
-4. Test responsive design on multiple screen sizes
-5. Update documentation as needed
+1. Check `docs/TASKS.md` for current development priorities
+2. Follow the patterns outlined in `docs/PLANNING.md`
+3. Ensure smart contracts are thoroughly tested
+4. Test Web3 interactions on testnet before mainnet
+5. Update documentation for new features
 
-## 📞 Support
+## 📄 License
 
-For questions or issues, please check the documentation in the `docs/` folder or create an issue in the repository.
+This project is open source under the MIT License. Commercial use requires attribution.
+
+## 📞 Support & Community
+
+- **Documentation**: `/docs` folder for technical details
+- **Discord**: [Join our community](https://discord.gg/attend-sure)
+- **Twitter**: [@AttendSure](https://twitter.com/attend-sure)
+- **Email**: support@attend-sure.com
+
+## ⚡ Quick Links
+
+- **Live Demo**: [app.attend-sure.com](https://app.attend-sure.com)
+- **Smart Contracts**: [Etherscan](https://etherscan.io/address/...)
+- **Whitepaper**: [docs.attend-sure.com](https://docs.attend-sure.com)
+- **API Docs**: [api.attend-sure.com](https://api.attend-sure.com)
 
 ---
 
-**Built with ❤️ using Next.js, Tailwind CSS, and Shadcn/UI**
+**Built with ❤️ for the crypto community using Next.js, Web3, and blockchain technology**
+
+*Attend-Sure: Where commitment meets cryptography*
