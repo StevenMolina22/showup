@@ -3,11 +3,8 @@ import { ArrowLeft, Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  getEventById,
-  getRelatedEvents,
-  getCachedEvents,
-} from "@/lib/event-utils";
+import { getEventById, getRelatedEvents } from "@/lib/event-utils";
+import { getEvents } from "@/lib/event-service";
 import { formatEventDate } from "@/lib/date-utils";
 import { Metadata } from "next";
 import EventActions from "./EventActions";
@@ -22,7 +19,8 @@ export async function generateMetadata({
   params,
 }: EventDetailPageProps): Promise<Metadata> {
   const { id } = await params;
-  const event = await getEventById(id);
+  const events = await getEvents();
+  const event = getEventById(id, events);
 
   if (!event) {
     return {
@@ -59,7 +57,9 @@ export default async function EventDetailPage({
   params,
 }: EventDetailPageProps) {
   const { id } = await params;
-  const event = await getEventById(id);
+  // Fetch all events once
+  const events = await getEvents();
+  const event = getEventById(id, events);
 
   if (!event) {
     notFound();
@@ -78,9 +78,8 @@ export default async function EventDetailPage({
     }
   };
 
-  // Get all events for related events calculation
-  const allEvents = await getCachedEvents();
-  const relatedEvents = getRelatedEvents(event, allEvents, 3);
+  // Get related events using the already fetched events
+  const relatedEvents = getRelatedEvents(event, events, 3);
 
   return (
     <div className="min-h-screen bg-gray-50">

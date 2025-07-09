@@ -31,6 +31,7 @@
 - [2024-12-19] ✅ Create minimalist event detail page with clean UX
 - [2024-12-19] ✅ Integrate Apify API for real event data with fallback to mock data
 - [2024-12-19] ✅ Modify event detail page to use fetched events instead of mock data
+- [2024-12-19] ✅ Simplify event fetching architecture to avoid unnecessary API calls
 - [ ] Test responsive design on different screen sizes (manual testing needed)
 - [ ] Add error boundary components
 - [ ] Implement proper SEO optimization
@@ -98,6 +99,11 @@
 - [2024-12-19] Updated event detail page to use real fetched events instead of mock data
 - [2024-12-19] Implemented event caching for improved performance across components
 - [2024-12-19] Added getEventById and getRelatedEvents utility functions
+- [2024-12-19] Simplified event fetching by centralizing API calls in event-service.ts
+- [2024-12-19] Removed unnecessary caching complexity from event-utils.ts
+- [2024-12-19] Updated both main page and event detail page to use single event fetch per request
+- [2024-12-19] Created pure utility functions for event filtering and manipulation
+- [2024-12-19] Eliminated duplicate API calls between components
 
 ## 🎉 Project Status
 **CORE FEATURES COMPLETE + APIFY API INTEGRATED** - The minimalist tech events aggregator UI is fully functional with real event data from Apify API. All key requirements have been implemented:

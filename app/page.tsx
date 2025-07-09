@@ -2,11 +2,11 @@ import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import EventGrid from "@/components/EventGrid";
 import Footer from "@/components/Footer";
-import { getCachedEvents } from "@/lib/event-utils";
+import { getEvents } from "@/lib/event-service";
 
 export default async function Home() {
-  // Fetch events using cached utility function with fallback to mock data
-  const events = await getCachedEvents();
+  // Fetch events from API with fallback to mock data
+  const events = await getEvents();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50">
