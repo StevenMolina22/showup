@@ -20,18 +20,15 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50">
-      <Header
-        title="Attend-Sure"
-        subtitle="Blockchain RSVP events with staking - discover, stake, attend, get rewarded."
-      />
+      <Header />
 
-      <main className="flex flex-col items-center">
+      <main className="flex flex-col items-center py-16">
         {/* Search Section */}
-        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-8">
             <SearchBar placeholder="Search events..." disabled={true} />
           </div>
-        </section>
+        </section> */}
 
         {/* Events Section */}
         <section className="w-full">

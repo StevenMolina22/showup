@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, X, Calendar, MapPin, Users, DollarSign } from "lucide-react";
+import { Plus, X, Calendar, MapPin, Users, DollarSign } from "lucide-react";
 import { createNativeEvent, type NativeEvent } from "@/lib/native-events";
+import Header from "@/components/Header";
 
 export default function CreateEventPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function CreateEventPage() {
     organizerName: "",
     organizerEmail: "",
     organizerAvatar: "",
-    isActive: true
+    isActive: true,
   });
 
   const [tags, setTags] = useState<string[]>([]);
@@ -41,9 +42,24 @@ export default function CreateEventPage() {
 
   // Predefined tag suggestions
   const tagSuggestions = [
-    "crypto", "defi", "nft", "blockchain", "ethereum", "bitcoin",
-    "ai", "ml", "web3", "dao", "startup", "networking", "workshop",
-    "conference", "meetup", "hackathon", "education", "investment"
+    "crypto",
+    "defi",
+    "nft",
+    "blockchain",
+    "ethereum",
+    "bitcoin",
+    "ai",
+    "ml",
+    "web3",
+    "dao",
+    "startup",
+    "networking",
+    "workshop",
+    "conference",
+    "meetup",
+    "hackathon",
+    "education",
+    "investment",
   ];
 
   const timezones = [
@@ -56,27 +72,27 @@ export default function CreateEventPage() {
     "Europe/Berlin",
     "Asia/Tokyo",
     "Asia/Singapore",
-    "Australia/Sydney"
+    "Australia/Sydney",
   ];
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: "" }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
   const addTag = (tag: string) => {
     const trimmedTag = tag.trim().toLowerCase();
     if (trimmedTag && !tags.includes(trimmedTag)) {
-      setTags(prev => [...prev, trimmedTag]);
+      setTags((prev) => [...prev, trimmedTag]);
     }
     setNewTag("");
   };
 
   const removeTag = (tagToRemove: string) => {
-    setTags(prev => prev.filter(tag => tag !== tagToRemove));
+    setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -91,12 +107,17 @@ export default function CreateEventPage() {
 
     // Required fields
     if (!formData.title.trim()) newErrors.title = "Event title is required";
-    if (!formData.description.trim()) newErrors.description = "Event description is required";
-    if (!formData.startAt) newErrors.startAt = "Start date and time is required";
+    if (!formData.description.trim())
+      newErrors.description = "Event description is required";
+    if (!formData.startAt)
+      newErrors.startAt = "Start date and time is required";
     if (!formData.endAt) newErrors.endAt = "End date and time is required";
-    if (!formData.location.trim()) newErrors.location = "Event location is required";
-    if (!formData.organizerName.trim()) newErrors.organizerName = "Organizer name is required";
-    if (!formData.organizerEmail.trim()) newErrors.organizerEmail = "Organizer email is required";
+    if (!formData.location.trim())
+      newErrors.location = "Event location is required";
+    if (!formData.organizerName.trim())
+      newErrors.organizerName = "Organizer name is required";
+    if (!formData.organizerEmail.trim())
+      newErrors.organizerEmail = "Organizer email is required";
 
     // Date validation
     if (formData.startAt && formData.endAt) {
@@ -113,16 +134,26 @@ export default function CreateEventPage() {
     }
 
     // Email validation
-    if (formData.organizerEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.organizerEmail)) {
+    if (
+      formData.organizerEmail &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.organizerEmail)
+    ) {
       newErrors.organizerEmail = "Please enter a valid email address";
     }
 
     // Numeric validations
-    if (formData.maxAttendees && (isNaN(Number(formData.maxAttendees)) || Number(formData.maxAttendees) < 1)) {
+    if (
+      formData.maxAttendees &&
+      (isNaN(Number(formData.maxAttendees)) ||
+        Number(formData.maxAttendees) < 1)
+    ) {
       newErrors.maxAttendees = "Max attendees must be a positive number";
     }
 
-    if (formData.stakeAmount && (isNaN(Number(formData.stakeAmount)) || Number(formData.stakeAmount) < 0)) {
+    if (
+      formData.stakeAmount &&
+      (isNaN(Number(formData.stakeAmount)) || Number(formData.stakeAmount) < 0)
+    ) {
       newErrors.stakeAmount = "Stake amount must be a non-negative number";
     }
 
@@ -141,7 +172,7 @@ export default function CreateEventPage() {
 
     try {
       // Create the event
-      const eventData: Omit<NativeEvent, 'id' | 'createdAt' | 'updatedAt'> = {
+      const eventData: Omit<NativeEvent, "id" | "createdAt" | "updatedAt"> = {
         title: formData.title.trim(),
         description: formData.description.trim(),
         startAt: new Date(formData.startAt).toISOString(),
@@ -152,14 +183,18 @@ export default function CreateEventPage() {
         city: formData.city.trim() || undefined,
         image: formData.image.trim() || undefined,
         tags,
-        maxAttendees: formData.maxAttendees ? Number(formData.maxAttendees) : undefined,
-        stakeAmount: formData.stakeAmount ? Number(formData.stakeAmount) : undefined,
+        maxAttendees: formData.maxAttendees
+          ? Number(formData.maxAttendees)
+          : undefined,
+        stakeAmount: formData.stakeAmount
+          ? Number(formData.stakeAmount)
+          : undefined,
         organizer: {
           name: formData.organizerName.trim(),
           email: formData.organizerEmail.trim(),
-          avatar: formData.organizerAvatar.trim() || undefined
+          avatar: formData.organizerAvatar.trim() || undefined,
         },
-        isActive: formData.isActive
+        isActive: formData.isActive,
       };
 
       const newEvent = createNativeEvent(eventData);
@@ -176,23 +211,14 @@ export default function CreateEventPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center space-x-4">
-            <Link href="/manage">
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-1" />
-                Back
-              </Button>
-            </Link>
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Create New Event</h1>
-              <p className="text-slate-600 mt-1">Set up a new blockchain RSVP event with staking</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Header
+        title="Create New Event"
+        subtitle="Set up a new blockchain RSVP event with staking"
+        showBackButton={true}
+        backButtonText="Back to Manage"
+        backButtonHref="/manage"
+        maxWidth="4xl"
+      />
 
       {/* Form */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -215,7 +241,9 @@ export default function CreateEventPage() {
                   placeholder="e.g., Crypto Startup Pitch Night"
                   className={errors.title ? "border-red-500" : ""}
                 />
-                {errors.title && <p className="text-sm text-red-600 mt-1">{errors.title}</p>}
+                {errors.title && (
+                  <p className="text-sm text-red-600 mt-1">{errors.title}</p>
+                )}
               </div>
 
               <div>
@@ -223,12 +251,18 @@ export default function CreateEventPage() {
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => handleInputChange("description", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
                   placeholder="Describe your event, what attendees can expect, and why they should join..."
                   rows={4}
                   className={errors.description ? "border-red-500" : ""}
                 />
-                {errors.description && <p className="text-sm text-red-600 mt-1">{errors.description}</p>}
+                {errors.description && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.description}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -238,10 +272,16 @@ export default function CreateEventPage() {
                     id="startAt"
                     type="datetime-local"
                     value={formData.startAt}
-                    onChange={(e) => handleInputChange("startAt", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("startAt", e.target.value)
+                    }
                     className={errors.startAt ? "border-red-500" : ""}
                   />
-                  {errors.startAt && <p className="text-sm text-red-600 mt-1">{errors.startAt}</p>}
+                  {errors.startAt && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.startAt}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -253,7 +293,9 @@ export default function CreateEventPage() {
                     onChange={(e) => handleInputChange("endAt", e.target.value)}
                     className={errors.endAt ? "border-red-500" : ""}
                   />
-                  {errors.endAt && <p className="text-sm text-red-600 mt-1">{errors.endAt}</p>}
+                  {errors.endAt && (
+                    <p className="text-sm text-red-600 mt-1">{errors.endAt}</p>
+                  )}
                 </div>
               </div>
 
@@ -262,7 +304,9 @@ export default function CreateEventPage() {
                 <select
                   id="timezone"
                   value={formData.timezone}
-                  onChange={(e) => handleInputChange("timezone", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("timezone", e.target.value)
+                  }
                   className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {timezones.map((tz) => (
@@ -299,11 +343,15 @@ export default function CreateEventPage() {
                 <Input
                   id="location"
                   value={formData.location}
-                  onChange={(e) => handleInputChange("location", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("location", e.target.value)
+                  }
                   placeholder="e.g., Innovation Hub NYC"
                   className={errors.location ? "border-red-500" : ""}
                 />
-                {errors.location && <p className="text-sm text-red-600 mt-1">{errors.location}</p>}
+                {errors.location && (
+                  <p className="text-sm text-red-600 mt-1">{errors.location}</p>
+                )}
               </div>
 
               <div>
@@ -311,7 +359,9 @@ export default function CreateEventPage() {
                 <Input
                   id="fullAddress"
                   value={formData.fullAddress}
-                  onChange={(e) => handleInputChange("fullAddress", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("fullAddress", e.target.value)
+                  }
                   placeholder="123 Tech Street, New York, NY 10001"
                 />
               </div>
@@ -345,28 +395,46 @@ export default function CreateEventPage() {
                     type="number"
                     min="1"
                     value={formData.maxAttendees}
-                    onChange={(e) => handleInputChange("maxAttendees", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("maxAttendees", e.target.value)
+                    }
                     placeholder="e.g., 150"
                     className={errors.maxAttendees ? "border-red-500" : ""}
                   />
-                  {errors.maxAttendees && <p className="text-sm text-red-600 mt-1">{errors.maxAttendees}</p>}
-                  <p className="text-sm text-slate-600 mt-1">Leave empty for unlimited attendees</p>
+                  {errors.maxAttendees && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.maxAttendees}
+                    </p>
+                  )}
+                  <p className="text-sm text-slate-600 mt-1">
+                    Leave empty for unlimited attendees
+                  </p>
                 </div>
 
                 <div>
-                  <Label htmlFor="stakeAmount">Stake Amount in ETH (optional)</Label>
+                  <Label htmlFor="stakeAmount">
+                    Stake Amount in ETH (optional)
+                  </Label>
                   <Input
                     id="stakeAmount"
                     type="number"
                     min="0"
                     step="0.001"
                     value={formData.stakeAmount}
-                    onChange={(e) => handleInputChange("stakeAmount", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("stakeAmount", e.target.value)
+                    }
                     placeholder="e.g., 0.01"
                     className={errors.stakeAmount ? "border-red-500" : ""}
                   />
-                  {errors.stakeAmount && <p className="text-sm text-red-600 mt-1">{errors.stakeAmount}</p>}
-                  <p className="text-sm text-slate-600 mt-1">Amount attendees stake to RSVP</p>
+                  {errors.stakeAmount && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.stakeAmount}
+                    </p>
+                  )}
+                  <p className="text-sm text-slate-600 mt-1">
+                    Amount attendees stake to RSVP
+                  </p>
                 </div>
               </div>
 
@@ -375,7 +443,11 @@ export default function CreateEventPage() {
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="flex items-center gap-1">
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="flex items-center gap-1"
+                      >
                         {tag}
                         <button
                           type="button"
@@ -408,7 +480,7 @@ export default function CreateEventPage() {
                   <div className="flex flex-wrap gap-2">
                     <span className="text-sm text-slate-600">Suggestions:</span>
                     {tagSuggestions
-                      .filter(suggestion => !tags.includes(suggestion))
+                      .filter((suggestion) => !tags.includes(suggestion))
                       .slice(0, 6)
                       .map((suggestion) => (
                         <button
@@ -419,8 +491,7 @@ export default function CreateEventPage() {
                         >
                           {suggestion}
                         </button>
-                      ))
-                    }
+                      ))}
                   </div>
                 </div>
               </div>
@@ -442,11 +513,17 @@ export default function CreateEventPage() {
                   <Input
                     id="organizerName"
                     value={formData.organizerName}
-                    onChange={(e) => handleInputChange("organizerName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("organizerName", e.target.value)
+                    }
                     placeholder="Your full name"
                     className={errors.organizerName ? "border-red-500" : ""}
                   />
-                  {errors.organizerName && <p className="text-sm text-red-600 mt-1">{errors.organizerName}</p>}
+                  {errors.organizerName && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.organizerName}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -455,20 +532,30 @@ export default function CreateEventPage() {
                     id="organizerEmail"
                     type="email"
                     value={formData.organizerEmail}
-                    onChange={(e) => handleInputChange("organizerEmail", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("organizerEmail", e.target.value)
+                    }
                     placeholder="your@email.com"
                     className={errors.organizerEmail ? "border-red-500" : ""}
                   />
-                  {errors.organizerEmail && <p className="text-sm text-red-600 mt-1">{errors.organizerEmail}</p>}
+                  {errors.organizerEmail && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.organizerEmail}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="organizerAvatar">Organizer Avatar URL (optional)</Label>
+                <Label htmlFor="organizerAvatar">
+                  Organizer Avatar URL (optional)
+                </Label>
                 <Input
                   id="organizerAvatar"
                   value={formData.organizerAvatar}
-                  onChange={(e) => handleInputChange("organizerAvatar", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("organizerAvatar", e.target.value)
+                  }
                   placeholder="https://example.com/avatar.jpg"
                 />
               </div>
@@ -478,10 +565,14 @@ export default function CreateEventPage() {
                   id="isActive"
                   type="checkbox"
                   checked={formData.isActive}
-                  onChange={(e) => handleInputChange("isActive", e.target.checked)}
+                  onChange={(e) =>
+                    handleInputChange("isActive", e.target.checked)
+                  }
                   className="rounded border-slate-300"
                 />
-                <Label htmlFor="isActive">Event is active and visible to attendees</Label>
+                <Label htmlFor="isActive">
+                  Event is active and visible to attendees
+                </Label>
               </div>
             </CardContent>
           </Card>

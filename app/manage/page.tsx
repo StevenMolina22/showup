@@ -28,6 +28,7 @@ import {
   searchNativeEvents,
   type NativeEvent,
 } from "@/lib/native-events";
+import Header from "@/components/Header";
 
 export default function ManageEventsPage() {
   const [events, setEvents] = useState<NativeEvent[]>([]);
@@ -98,27 +99,15 @@ export default function ManageEventsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">
-                Event Management
-              </h1>
-              <p className="text-slate-600 mt-1">
-                Create and manage your blockchain RSVP events
-              </p>
-            </div>
-            <Link href="/manage/events/create">
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                <Plus className="w-4 h-4 mr-2" />
-                Create Event
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <Header
+        title="Event Management"
+        subtitle="Create and manage your blockchain RSVP events"
+        actionButton={{
+          text: "Create Event",
+          href: "/manage/events/create",
+          icon: <Plus className="w-4 h-4 mr-2" />,
+        }}
+      />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

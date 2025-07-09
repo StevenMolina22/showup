@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,8 @@ import { getEventById, getRelatedEvents } from "@/lib/event-utils";
 import { getEvents } from "@/lib/event-service";
 import { formatEventDate } from "@/lib/date-utils";
 import { Metadata } from "next";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import EventActions from "./EventActions";
 
 interface EventDetailPageProps {
@@ -83,28 +85,14 @@ export default async function EventDetailPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with back button */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors group"
-            >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="font-medium">Back to Events</span>
-            </Link>
-            <div className="flex items-center gap-2 ml-4">
-              <div className="flex items-center justify-center w-8 h-8 bg-blue-600 rounded-lg">
-                <Calendar className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-lg font-semibold text-gray-900">
-                Tech Events
-              </span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header
+        title="Event Details"
+        subtitle="View event information and RSVP options"
+        showBackButton={true}
+        backButtonText="Back to Events"
+        backButtonHref="/"
+        maxWidth="4xl"
+      />
 
       {/* Main content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -270,17 +258,7 @@ export default async function EventDetailPage({
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-100 mt-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <p className="text-gray-600 text-sm">
-              <span className="font-semibold">Unified Tech Events</span> –
-              simplifying crypto and AI event discovery.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

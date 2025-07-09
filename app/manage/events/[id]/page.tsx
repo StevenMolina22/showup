@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  ArrowLeft,
   Edit,
   Trash2,
   Calendar,
@@ -24,6 +23,7 @@ import {
   deleteNativeEvent,
   type NativeEvent,
 } from "@/lib/native-events";
+import Header from "@/components/Header";
 
 interface EventDetailPageProps {
   params: Promise<{
@@ -147,6 +147,14 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
   if (!event) {
     return (
       <div className="min-h-screen bg-slate-50">
+        <Header
+          title="Event Not Found"
+          subtitle="The event you're looking for doesn't exist or has been deleted"
+          showBackButton={true}
+          backButtonText="Back to Manage"
+          backButtonHref="/manage"
+          maxWidth="4xl"
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
             <Calendar className="mx-auto w-12 h-12 text-slate-400 mb-4" />
@@ -158,10 +166,7 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
               deleted.
             </p>
             <Link href="/manage">
-              <Button>
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Events
-              </Button>
+              <Button>Back to Events</Button>
             </Link>
           </div>
         </div>
@@ -173,45 +178,37 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/manage">
-                <Button variant="outline" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-1" />
-                  Back
-                </Button>
-              </Link>
-              <div>
-                <div className="flex items-center space-x-3 mb-2">
-                  <h1 className="text-3xl font-bold text-slate-900">
-                    {event.title}
-                  </h1>
-                  <Badge className={status.color}>{status.label}</Badge>
-                </div>
-                <p className="text-slate-600">Event Details & Management</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Link href={`/manage/events/${eventId}/edit`}>
-                <Button variant="outline">
-                  <Edit className="w-4 h-4 mr-1" />
-                  Edit
-                </Button>
-              </Link>
-              <Button
-                variant="outline"
-                onClick={handleDeleteEvent}
-                disabled={isDeleting}
-                className="text-red-600 hover:text-red-700 hover:bg-red-50"
-              >
-                <Trash2 className="w-4 h-4 mr-1" />
-                {isDeleting ? "Deleting..." : "Delete"}
-              </Button>
-            </div>
+      <Header
+        title={event.title}
+        subtitle="Event Details & Management"
+        showBackButton={true}
+        backButtonText="Back to Manage"
+        backButtonHref="/manage"
+        actionButton={{
+          text: "Edit Event",
+          href: `/manage/events/${eventId}/edit`,
+          icon: <Edit className="w-4 h-4 mr-1" />,
+          variant: "outline",
+        }}
+        maxWidth="4xl"
+      />
+
+      {/* Additional Actions */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Badge className={status.color}>{status.label}</Badge>
+            <span className="text-sm text-slate-600">Event Status</span>
           </div>
+          <Button
+            variant="outline"
+            onClick={handleDeleteEvent}
+            disabled={isDeleting}
+            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+          >
+            <Trash2 className="w-4 h-4 mr-1" />
+            {isDeleting ? "Deleting..." : "Delete Event"}
+          </Button>
         </div>
       </div>
 

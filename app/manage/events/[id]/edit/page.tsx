@@ -9,20 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowLeft,
-  Plus,
-  X,
-  Calendar,
-  MapPin,
-  Users,
-  DollarSign,
-} from "lucide-react";
+import { Plus, X, Calendar, MapPin, Users, DollarSign } from "lucide-react";
 import {
   getNativeEventById,
   updateNativeEvent,
   type NativeEvent,
 } from "@/lib/native-events";
+import Header from "@/components/Header";
 
 interface EditEventPageProps {
   params: Promise<{
@@ -293,25 +286,14 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center space-x-4">
-            <Link href={`/manage/events/${eventId}`}>
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-1" />
-                Back
-              </Button>
-            </Link>
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Edit Event</h1>
-              <p className="text-slate-600 mt-1">
-                Update your blockchain RSVP event details
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Header
+        title="Edit Event"
+        subtitle="Update your blockchain RSVP event details"
+        showBackButton={true}
+        backButtonText="Back to Event"
+        backButtonHref={`/manage/events/${eventId}`}
+        maxWidth="4xl"
+      />
 
       {/* Form */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
