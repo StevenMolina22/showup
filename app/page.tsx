@@ -3,16 +3,26 @@ import SearchBar from "@/components/SearchBar";
 import EventGrid from "@/components/EventGrid";
 import Footer from "@/components/Footer";
 import { getEvents } from "@/lib/event-service";
+import {
+  getNativeEvents,
+  convertNativeEventToEvent,
+} from "@/lib/native-events";
 
 export default async function Home() {
   // Fetch events from API with fallback to mock data
-  const events = await getEvents();
+  const apiEvents = await getEvents();
+
+  // Get native events and convert them to the standard Event interface
+  const nativeEvents = getNativeEvents().map(convertNativeEventToEvent);
+
+  // Combine both types of events
+  const events = [...apiEvents, ...nativeEvents];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50">
       <Header
-        title="Unified Tech Events"
-        subtitle="All crypto & AI events, in one place."
+        title="Attend-Sure"
+        subtitle="Blockchain RSVP events with staking - discover, stake, attend, get rewarded."
       />
 
       <main className="flex flex-col items-center">
